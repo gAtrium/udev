@@ -2,6 +2,7 @@
 export default {
   target: 'static',
   router: {
-    baseURL: '/udev/'
+    baseURL: '/udev/',
+    base: '/udev/'
   }
 }
