@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
   app: {
-    base: '/udev/'
+    baseURL: '/udev/'
   }
 })
