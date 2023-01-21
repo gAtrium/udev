@@ -129,7 +129,7 @@ export default {
         }
     },
     beforeMount() {
-        this.imgsrc = new URL(`../assets/${this.$props._imgsrc}`, import.meta.url);
+        this.$data.imgsrc = new URL(`../assets/${this.$props._imgsrc}`, import.meta.url);
     },
     mounted() {
         setTimeout(this.glitchIt, 300);
