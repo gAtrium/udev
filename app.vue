@@ -4,7 +4,7 @@
     <div id="header">
         <img src="~/assets/logo-test.png" id="logoleft" style="margin-left:0; height: 100%;" alt=""/>
         <NuxtLink to="/">Home</NuxtLink>
-        <NuxtLink to="/team ">meet_the_team</NuxtLink>
+        <NuxtLink to="/team/">meet_the_team</NuxtLink>
         <NuxtLink to="/bounce">our_sponsors</NuxtLink> 
         <NuxtLink to="/slide">announcements</NuxtLink>
         <div id="termcontainer">
