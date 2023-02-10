@@ -1,6 +1,6 @@
 <template>
     <div id="indexContent">
-        <HackerTyperText ref="influence" id="Influence" txt="Your community" fontSize="5" />
+        <HackerTyperText ref="influence" id="Influence" txt="Your community" fontSize="5" isLoading="true" />
             <p class="bio">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </p>
@@ -44,7 +44,7 @@ export default{
       var lol = ["community", "opportunities", "friends", "career", "I have no idea"]
       //print(lol[Math.random() * lol.length])
       if(this.$refs.influence.isWriting() == 0) this.$refs.influence.writeNew(lol[Math.floor(Math.random() * lol.length)], "Your ".length) 
-    }, Math.random() * 6000);
+    }, Math.random() * 12000);
     }
 }
 </script>

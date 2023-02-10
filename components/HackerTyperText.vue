@@ -30,6 +30,7 @@ export default {
             interval: null,
             intervaldelay: 0,
             step: 0,
+            writing: false
         }
     },
     mounted() {
@@ -51,7 +52,7 @@ export default {
                 this.intervaldelay = 30;
             }
             else this.intervaldelay = (this.$props.time / this.towrite.length) * 1000;
-
+            this.writing = true;
             if(this.writtentext.length - until != 0){
                 this.interval = setInterval(this.clearText,this.intervaldelay, until);
             }
@@ -60,43 +61,46 @@ export default {
             }
         },
         writeChar(givenLength = 0) {
-            if (this.step == this.towrite.length + givenLength) {
+            if (this.step >= this.towrite.length + givenLength) {
                 this.step = 0;
                 console.log("Write char toggle.")
                 this.$refs.blinky.classList.toggle("blinky")
                 clearInterval(this.interval);
                 this.interval = 0;
+                this.writing = false
                 return;
             }
 
-            if(this.$props.isLoading) {
-                if(Math.floor(Math.random() * 70) == 29 ) {
-                    clearInterval(this.interval)
+            if(this.$props.isLoading && this.writing) {
+                if(Math.floor(Math.random() * 70) == 29) {
                     //Whoopsie, we made a typo.
-                    console.log("TYPO!")
+                    clearInterval(this.interval)
                     this.writtentext += (Math.random() + 1).toString(36).substring(2,7)[0];
                     setTimeout(()=> {
                         this.writtentext = this.writtentext.slice(0,-1);
                         setTimeout(()=>{
-                            this.interval = setInterval(this.writeChar,this.intervaldelay)
+                                this.interval = setInterval(this.writeChar,this.intervaldelay)
                         }, Math.random() * 800);
                     }, Math.random() * 1000)
                     return;
                 }
             }
-            this.writtentext += this.towrite.charAt(this.step);
-            this.step++;
+            if(this.writing){
+                this.writtentext += this.towrite.charAt(this.step);
+                this.step++;
+            }
         },
         clearText(until = 0) {
             if(this.writtentext.length - until == 0){
                 clearInterval(this.interval);
+                this.writing = false
                 this.writeNew("", until);
                 return;
             }
             this.writtentext = this.writtentext.slice(0,-1);
         },
         isWriting(){
-            return this.interval;
+            return this.writing;
         }
         
     }
